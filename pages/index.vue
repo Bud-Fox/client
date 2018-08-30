@@ -1,6 +1,6 @@
 <template>
   <v-flex>
-    <h2>{{ this.asset }}</h2>
+    <h2>{{ this.asset.name }}</h2>
     <h2>{{ this.currency }}</h2>
     <h2>{{ days }}</h2>
     <v-select
@@ -29,6 +29,11 @@
         label="Days"
       ></v-slider>
     </v-flex>
+    <v-btn
+      color="success"
+      to="/inspire"
+      @click="requestPrices"
+    >Success</v-btn>
   </v-flex>
 </template>
 
@@ -48,8 +53,8 @@ export default {
     }
   },
   methods: {
-    fas () {
-      return axios.get('https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=btc&days=1')
+    requestPrices () {
+      return axios.get(`https://api.coingecko.com/api/v3/coins/${this.asset.id}/market_chart?vs_currency=${this.currency}&days=${this.days}`)
         .then(res => {
           this.$store.commit('getPrices', res.data)
         })
@@ -57,10 +62,6 @@ export default {
   },
   async fetch ({ store, params }) {
     store.dispatch('setCoins')
-    // return axios.get('https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=btc&days=1')
-    //   .then(res => {
-    //     store.commit('getPrices', res.data)
-    //   })
   }
 }
 </script>
