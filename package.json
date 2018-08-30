@@ -12,7 +12,9 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.1",
+    "@statnett/vue-plotly": "^0.2.0",
     "nuxt": "^1.0.0",
+    "plotly.js": "^1.40.1",
     "vuetify": "^1.0.0"
   },
   "devDependencies": {
