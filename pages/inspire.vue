@@ -10,6 +10,11 @@
       <!-- <p v-for="ds in this.$store.state.ds" :key="ds">{{ ds }}</p> -->
       <!-- <p v-for="i in this.$store.state.y" :key="i">{{ i }}</p> -->
       <vue-plotly :data="data" :layout="layout" :options="options"/>
+       <v-btn
+        color="success"
+        to="/inspire"
+        @click="coisa"
+      >Success</v-btn>
       <blockquote class="blockquote">
         &#8220;First, solve the problem. Then, write the code.&#8221;
         <footer>
@@ -35,6 +40,14 @@ export default {
       layout: { title: 'lucas', xaxis: { type: 'date' } },
       options: {}
     }
+  },
+  methods: {
+    coisa () {
+      this.$store.dispatch('sendToApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
+    }
   }
+  // async fetch ({ store, params }) {
+  //   store.dispatch('setCoins')
+  // }
 }
 </script>

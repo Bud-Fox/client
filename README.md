@@ -1,6 +1,6 @@
-# Cryptophet
+# Bud Fox
 
-> Cryptophet using Nuxt.js
+> Bud Fox using Nuxt.js
 
 ## Build Setup
 

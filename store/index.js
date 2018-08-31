@@ -26,11 +26,12 @@ export const mutations = {
   getCoins: (state, data) => {
     state.coins = data
   },
-  sendToApi: (state, data) => {
-    this.$axios.get('http://localhost:5001/coisa', {
-      ds: state.ds,
-      y: state.y
-    })
+  sendToApi: ({commit, params}) => {
+    console.log(params)
+    // this.$axios.post('http://localhost:5001/coisa', {
+    //   ds: state.ds,
+    //   y: state.y
+    // })
   }
 }
 
@@ -49,5 +50,12 @@ export const actions = {
     //   .then(res => {
     //     commit('getCoins', res.data)
     //   })
+  },
+  sendToApi: ({commit, params}) => {
+    console.log(params)
+    // this.$axios.post('http://localhost:5001/coisa', {
+    //   ds: state.ds,
+    //   y: state.y
+    // })
   }
 }

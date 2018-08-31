@@ -4,11 +4,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'prophetly',
+    title: 'bud-fox',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Prophetly using Nuxt.js' }
+      { hid: 'description', name: 'description', content: 'Bud Fox using Nuxt.js' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
