@@ -6,6 +6,7 @@
 
       <p>--</p>
       <!-- {{ this.$store.state.y }} -->
+      {{ this.$store.state.asset.id }}
       <!-- <p v-for="ds in this.$store.state.ds" :key="ds">{{ ds }}</p> -->
       <!-- <p v-for="i in this.$store.state.y" :key="i">{{ i }}</p> -->
       <vue-plotly :data="data" :layout="layout" :options="options"/>
@@ -30,8 +31,8 @@ export default {
   },
   data: function () {
     return {
-      data: [{ x: [1, 3], y: [2, 4] }],
-      layout: {},
+      data: [{ x: this.$store.state.ds, y: this.$store.state.y }],
+      layout: { title: 'lucas', xaxis: { type: 'date' } },
       options: {}
     }
   }

@@ -1,4 +1,6 @@
 export const state = () => ({
+  asset: { name: 'Bitcoin', id: 'bitcoin' },
+  days: 80,
   sidebar: false,
   prices: [],
   coins: [],
@@ -14,7 +16,8 @@ export const mutations = {
     var ds = []
     var y = []
     for (var i = 0; i < data.prices.length; i++) {
-      ds.push(data.prices[i][0])
+      var date = new Date(data.prices[i][0])
+      ds.push(date)
       y.push(data.prices[i][1])
     }
     state.ds = ds
@@ -22,6 +25,12 @@ export const mutations = {
   },
   getCoins: (state, data) => {
     state.coins = data
+  },
+  sendToApi: (state, data) => {
+    this.$axios.get('http://localhost:5001/coisa', {
+      ds: state.ds,
+      y: state.y
+    })
   }
 }
 

@@ -42,7 +42,7 @@ import axios from 'axios'
 
 export default {
   data: () => ({
-    asset: { name: 'Bitcoin', id: 'btc' },
+    asset: { name: 'Bitcoin', id: 'bitcoin' },
     days: 90,
     currency: 'USD',
     currencyList: ['USD', 'EUR', 'JPY', 'BTC', 'ETH']
