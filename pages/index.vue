@@ -1,8 +1,5 @@
 <template>
-  <v-flex>
-    <h2>{{ this.asset.name }}</h2>
-    <h2>{{ this.currency }}</h2>
-    <h2>{{ days }}</h2>
+  <v-flex md6>
     <v-select
       v-model="asset"
       :items="coinsList"
@@ -27,13 +24,28 @@
         :max="800"
         :min="1"
         label="Days"
+        thumb-label="always"
       ></v-slider>
+    </v-flex>
+    <v-flex xs12>
+      <v-slider
+        v-model="forecast"
+        :max="100"
+        :min="1"
+        label="Forecast"
+        thumb-label="always"
+        inverse-label
+      ></v-slider>
+    </v-flex>
+    <v-flex>
+      <img src="/bud.jpg" alt="Vuetify.js" class="mb-5">
+      <h2 class="mb-5 text-xs-center">"What do you wanna know Gordon? <br/> Forecast {{ forecast }} days {{ this.asset.name }}/{{ this.currency }}, based on {{ days }} days? ok"</h2>
     </v-flex>
     <v-btn
       color="success"
       to="/inspire"
       @click="requestPrices"
-    >Success</v-btn>
+    >Go Bud Fox</v-btn>
   </v-flex>
 </template>
 
@@ -44,6 +56,7 @@ export default {
   data: () => ({
     asset: { name: 'Bitcoin', id: 'bitcoin' },
     days: 90,
+    forecast: 3,
     currency: 'USD',
     currencyList: ['USD', 'EUR', 'JPY', 'BTC', 'ETH']
   }),

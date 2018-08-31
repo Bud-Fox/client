@@ -1,4 +1,5 @@
 # Bud Fox
+![bud](static/bud.jpg)
 
 > Bud Fox using Nuxt.js
 
