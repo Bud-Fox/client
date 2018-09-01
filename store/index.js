@@ -1,9 +1,11 @@
 const axios = require('axios')
+export const strict = false
 
 export const state = () => ({
   asset: { name: 'Bitcoin', id: 'bitcoin' },
   days: 80,
   sidebar: false,
+  forecast: [],
   prices: [],
   coins: [],
   ds: [],
@@ -34,7 +36,8 @@ export const mutations = {
     // this.$axios.setHeader("Access-Control-Expose-Headers", "Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization")
     return axios.post('http://localhost:5001/coisa', {'ds': data.ds, 'y': data.y})
       .then(res => {
-        console.log('oi', res)
+        // console.log('oi', res)
+        state.forecast = res.data
       })
   }
 }

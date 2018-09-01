@@ -6,9 +6,11 @@
       <p>--</p>
       <!-- {{ this.$store.state.y }} -->
       {{ this.$store.state.asset.id }}
+      <!-- {{ this.$store.state.forecast }} -->
       <!-- <p v-for="ds in this.$store.state.ds" :key="ds">{{ ds }}</p> -->
       <!-- <p v-for="i in this.$store.state.y" :key="i">{{ i }}</p> -->
       <vue-plotly :data="data" :layout="layout" :options="options"/>
+      <p>--</p>
        <v-btn
         color="success"
         to="/inspire"
@@ -35,8 +37,15 @@ export default {
   },
   data: function () {
     return {
-      data: [{ x: this.$store.state.ds, y: this.$store.state.y }],
-      layout: { title: 'lucas', xaxis: { type: 'date' } },
+      data: [
+        {
+          x: this.$store.state.forecast.ds, y: this.$store.state.forecast.y, name: 'lucas', type: 'scatter'
+        },
+        {
+          x: this.$store.state.forecast.ds, y: this.$store.state.forecast.yhat, name: 'hat', type: 'scatter'
+        }
+      ],
+      layout: { title: 'lucas', xaxis: { type: 'date' }, yaxis: { title: 'yas' } },
       options: {}
     }
   },
