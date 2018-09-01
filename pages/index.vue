@@ -63,7 +63,6 @@
         </blockquote>
         <v-btn
           color="info"
-          to="/answer"
           @click="requestPrices"
         >Yeah</v-btn>
       </v-flex>
@@ -90,9 +89,11 @@ export default {
   },
   methods: {
     requestPrices () {
+      console.log(this.asset.id, this.days, this.currency)
       return axios.get(`https://api.coingecko.com/api/v3/coins/${this.asset.id}/market_chart?vs_currency=${this.currency}&days=${this.days}`)
         .then(res => {
           this.$store.commit('getPrices', res.data)
+          this.$store.commit('sendApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
         })
     }
   },

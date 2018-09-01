@@ -1,11 +1,8 @@
 <template>
   <v-layout>
-    <v-flex text-xs-center>
+    <v-flex v-if="this.$store.state.loading"><h1>loading</h1></v-flex>
+    <v-flex text-xs-center v-else>
       <vue-plotly :data="data" :layout="layout" :options="options"/>
-       <v-btn
-        color="success"
-        @click="requestProphet"
-      >Success</v-btn>
       <v-btn
         color="info"
         to="/"
@@ -34,14 +31,6 @@ export default {
       layout: { title: 'lucas', xaxis: { type: 'date' }, yaxis: { title: 'yas' } },
       options: {}
     }
-  },
-  methods: {
-    requestProphet () {
-      this.$store.commit('sendApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
-    }
   }
-  // async fetch ({ store, params }) {
-  //   store.dispatch('setCoins')
-  // }
 }
 </script>
