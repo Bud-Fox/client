@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     coisa () {
-      this.$store.dispatch('sendToApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
+      this.$store.commit('sendApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
     }
   }
   // async fetch ({ store, params }) {

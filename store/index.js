@@ -1,3 +1,5 @@
+const axios = require('axios')
+
 export const state = () => ({
   asset: { name: 'Bitcoin', id: 'bitcoin' },
   days: 80,
@@ -26,24 +28,27 @@ export const mutations = {
   getCoins: (state, data) => {
     state.coins = data
   },
-  sendToApi: ({commit, params}) => {
-    console.log(params)
-    // this.$axios.post('http://localhost:5001/coisa', {
-    //   ds: state.ds,
-    //   y: state.y
-    // })
+  sendApi: (state, data) => {
+    // console.log(data)
+    // console.log('params')
+    // this.$axios.setHeader("Access-Control-Expose-Headers", "Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization")
+    return axios.post('http://localhost:5001/coisa', {'ds': data.ds, 'y': data.y})
+      .then(res => {
+        console.log('oi', res)
+      })
   }
 }
 
 export const actions = {
   setCoins ({ commit }) {
-    this.$axios.setHeader('accept-encoding', 'null')
-    return this.$axios.get('https://api.coingecko.com/api/v3/coins/list')
+    // axios.setHeader('accept-encoding', 'null')
+    return axios.get('https://api.coingecko.com/api/v3/coins/list')
       .then(res => {
         commit('getCoins', res.data)
       })
   },
   setPrices ({ commit, params }) {
+    console.log(params)
     console.log(params)
     // this.$axios.setHeader('accept-encoding', 'null')
     // return this.$axios.get('https://api.coingecko.com/api/v3/coins/list')
@@ -52,7 +57,8 @@ export const actions = {
     //   })
   },
   sendToApi: ({commit, params}) => {
-    console.log(params)
+    console.log(commit)
+    console.log('params')
     // this.$axios.post('http://localhost:5001/coisa', {
     //   ds: state.ds,
     //   y: state.y
