@@ -1,5 +1,5 @@
 <template>
-  <v-flex md6>
+  <v-container align-content-space-around="true" md6>
     <v-select
       v-model="asset"
       :items="coinsList"
@@ -10,6 +10,7 @@
       single-line
       item-text="name"
       item-value="id"
+      md6
     ></v-select>
     <v-select
       v-model="currency"
@@ -18,7 +19,7 @@
       return-object
       single-line
     ></v-select>
-    <v-flex xs12>
+    <v-flex>
       <v-slider
         v-model="days"
         :max="800"
@@ -27,7 +28,7 @@
         thumb-label="always"
       ></v-slider>
     </v-flex>
-    <v-flex xs12>
+    <v-flex>
       <v-slider
         v-model="forecast"
         :max="100"
@@ -37,16 +38,38 @@
         inverse-label
       ></v-slider>
     </v-flex>
-    <v-flex>
-      <img src="/bud.jpg" alt="Vuetify.js" class="mb-5">
-      <h2 class="mb-5 text-xs-center">"What do you wanna know Gordon? <br/> Forecast {{ forecast }} days {{ this.asset.name }}/{{ this.currency }}, based on {{ days }} days? ok"</h2>
-    </v-flex>
-    <v-btn
-      color="success"
-      to="/inspire"
-      @click="requestPrices"
-    >Go Bud Fox</v-btn>
-  </v-flex>
+    <v-flex
+        xs12
+        sm6
+        md8
+        align-center
+        justify-center
+        layout
+        text-xs-center
+      >
+        <v-avatar
+          :size="200"
+          color="grey lighten-4"
+        >
+          <img src="/bud.jpg" alt="avatar">
+        </v-avatar>
+        <blockquote class="blockquote">
+          &#8220;Tell me what u wanna know Grodon. <br> Forecast {{ forecast }} days {{ this.asset.name }}/{{ this.currency }}, based on {{ days }} days?&#8221;
+          <footer>
+            <small>
+              <em>&mdash;Bud Fox</em>
+            </small>
+          </footer>
+        </blockquote>
+        <v-btn
+          color="info"
+          to="/answer"
+          @click="requestPrices"
+        >Yeah</v-btn>
+      </v-flex>
+  </v-container>
+  
+  
 </template>
 
 <script>

@@ -1,29 +1,15 @@
 <template>
   <v-layout>
     <v-flex text-xs-center>
-      <!-- {{ this.$store.state.ds }} -->
-
-      <p>--</p>
-      <!-- {{ this.$store.state.y }} -->
-      {{ this.$store.state.asset.id }}
-      <!-- {{ this.$store.state.forecast }} -->
-      <!-- <p v-for="ds in this.$store.state.ds" :key="ds">{{ ds }}</p> -->
-      <!-- <p v-for="i in this.$store.state.y" :key="i">{{ i }}</p> -->
       <vue-plotly :data="data" :layout="layout" :options="options"/>
-      <p>--</p>
        <v-btn
         color="success"
-        to="/inspire"
-        @click="coisa"
+        @click="requestProphet"
       >Success</v-btn>
-      <blockquote class="blockquote">
-        &#8220;First, solve the problem. Then, write the code.&#8221;
-        <footer>
-          <small>
-            <em>&mdash;John Johnson</em>
-          </small>
-        </footer>
-      </blockquote>
+      <v-btn
+        color="info"
+        to="/"
+      >Ask again</v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -50,7 +36,7 @@ export default {
     }
   },
   methods: {
-    coisa () {
+    requestProphet () {
       this.$store.commit('sendApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
     }
   }
