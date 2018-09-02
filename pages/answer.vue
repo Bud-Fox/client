@@ -23,17 +23,36 @@ export default {
   data: function () {
     return {
       data: [
+        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.y, name: 'price', type: 'scatter' },
+        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.yhat, name: 'yhat', type: 'scatter' },
+        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.trend, name: 'trend', type: 'scatter' },
         {
-          x: this.$store.state.forecast.ds, y: this.$store.state.forecast.y, name: 'price', type: 'scatter'
+          x: this.$store.state.forecast.ds,
+          y: this.$store.state.forecast.yhat_upper,
+          name: 'upper',
+          type: 'scatter',
+          fill: 'tonexty',
+          fillcolor: 'rgba(0,201,253,.21)',
+          mode: 'none'
         },
         {
-          x: this.$store.state.forecast.ds, y: this.$store.state.forecast.yhat, name: 'yhat', type: 'scatter'
+          x: this.$store.state.forecast.ds,
+          y: this.$store.state.forecast.yhat_lower,
+          name: 'upper',
+          type: 'scatter',
+          fill: 'tonexty',
+          fillcolor: 'rgba(252,201,5,.05)',
+          mode: 'none'
         },
-        {
-          x: this.$store.state.forecast.ds, y: this.$store.state.forecast.trend, name: 'trend', type: 'scatter'
-        }
       ],
-      layout: { title: 'forecast', xaxis: { type: 'date' }, yaxis: { title: 'Price' } },
+      layout: { 
+        title: 'forecast',
+        xaxis: { type: 'date' },
+        yaxis: { title: 'Price' },
+        font: { color: 'rgb(255,255,255)' },
+        plot_bgcolor: '#2d2929',
+        paper_bgcolor: '#2d2929'
+      },
       options: {}
     }
   },
@@ -42,7 +61,6 @@ export default {
       for (var i = 0; i < this.$store.state.forecast.ds.length; i++) {
         var date = new Date(this.$store.state.forecast.ds[i])
         this.$store.state.forecast.ds[i] = date
-        console.log(this.$store.state.forecast.ds[i])
       }
     }
   }
