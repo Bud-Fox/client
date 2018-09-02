@@ -2,6 +2,7 @@ const axios = require('axios')
 export const strict = false
 
 export const state = () => ({
+  url: 'http://localhost:5001/prophet',
   asset: { name: 'Bitcoin', id: 'bitcoin' },
   days: 80,
   sidebar: false,
@@ -29,17 +30,21 @@ export const mutations = {
     }
     state.ds = ds
     state.y = y
-  },
-  getCoins: (state, data) => {
-    state.coins = data
-  },
-  sendApi: (state, data) => {
-    return axios.post('http://localhost:5001/prophet', {'ds': data.ds, 'y': data.y})
-      .then(res => {
+    return axios.post(state.url, {
+      'dataset': {  
+        'ds': ds,
+        'y': y
+      },
+      'changepoint_prior_scale': 0.01,
+      'forecast_days': 1
+    }).then(res => {
         state.forecast = res.data
         state.loading = false
         $nuxt._router.push('/answer')
       })
+  },
+  getCoins: (state, data) => {
+    state.coins = data
   }
 }
 

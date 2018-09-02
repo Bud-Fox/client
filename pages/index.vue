@@ -1,16 +1,37 @@
 <template>
   <v-container align-content-space-around="true" md6>
+    <v-flex
+      xs12
+      align-center
+      justify-center
+      layout
+      text-xs-center
+      class="mb-5"
+    >
+      <v-avatar
+        :size="200"
+        color="grey lighten-4"
+      >
+        <img src="/bud.jpg" alt="avatar">
+      </v-avatar>
+      <blockquote class="blockquote">
+        &#8220;Tell me what u wanna know Grodon. <br> Forecast {{ forecast }} days {{ this.asset.name }}/{{ this.currency }}, based on {{ days }} days?&#8221;
+        <footer>
+          <small>
+            <em>&mdash;Bud Fox</em>
+          </small>
+        </footer>
+      </blockquote>
+    </v-flex>
     <v-select
       v-model="asset"
       :items="coinsList"
-      label="Select a crypto"
       outline
       persistent-hint
       return-object
       single-line
       item-text="name"
       item-value="id"
-      md6
     ></v-select>
     <v-select
       v-model="currency"
@@ -39,33 +60,19 @@
       ></v-slider>
     </v-flex>
     <v-flex
-        xs12
-        sm6
-        md8
-        align-center
-        justify-center
-        layout
-        text-xs-center
-      >
-        <v-avatar
-          :size="200"
-          color="grey lighten-4"
-        >
-          <img src="/bud.jpg" alt="avatar">
-        </v-avatar>
-        <blockquote class="blockquote">
-          &#8220;Tell me what u wanna know Grodon. <br> Forecast {{ forecast }} days {{ this.asset.name }}/{{ this.currency }}, based on {{ days }} days?&#8221;
-          <footer>
-            <small>
-              <em>&mdash;Bud Fox</em>
-            </small>
-          </footer>
-        </blockquote>
-        <v-btn
-          color="info"
-          @click="requestPrices"
-        >Yeah</v-btn>
-      </v-flex>
+      xs12
+      align-center
+      justify-center
+      layout
+      text-xs-center
+    >
+      <v-btn
+        color="secondary"
+        large
+        fab
+        @click="requestPrices"
+      >Yeah</v-btn>
+    </v-flex>
   </v-container>
   
   
@@ -93,7 +100,7 @@ export default {
       return axios.get(`https://api.coingecko.com/api/v3/coins/${this.asset.id}/market_chart?vs_currency=${this.currency}&days=${this.days}`)
         .then(res => {
           this.$store.commit('getPrices', res.data)
-          this.$store.commit('sendApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
+          // this.$store.commit('sendApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
         })
     }
   },

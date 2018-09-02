@@ -6,7 +6,7 @@
       <!-- {{ this.$store.state.forecast }} -->
       <vue-plotly :data="data" :layout="layout" :options="options"/>
       <v-btn
-        color="info"
+        large
         to="/"
       >Ask again</v-btn>
     </v-flex>
@@ -23,13 +23,13 @@ export default {
   data: function () {
     return {
       data: [
-        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.y, name: 'price', type: 'scatter' },
-        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.yhat, name: 'yhat', type: 'scatter' },
-        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.trend, name: 'trend', type: 'scatter' },
+        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.y, name: 'Price', type: 'scatter' },
+        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.yhat, name: 'Hat', type: 'scatter' },
+        { x: this.$store.state.forecast.ds, y: this.$store.state.forecast.trend, name: 'Trend', type: 'scatter' },
         {
           x: this.$store.state.forecast.ds,
           y: this.$store.state.forecast.yhat_upper,
-          name: 'upper',
+          name: 'Upper Hat',
           type: 'scatter',
           fill: 'tonexty',
           fillcolor: 'rgba(0,201,253,.21)',
@@ -38,7 +38,7 @@ export default {
         {
           x: this.$store.state.forecast.ds,
           y: this.$store.state.forecast.yhat_lower,
-          name: 'upper',
+          name: 'Lower Hat',
           type: 'scatter',
           fill: 'tonexty',
           fillcolor: 'rgba(252,201,5,.05)',
