@@ -47,7 +47,7 @@
       </v-container>
     </v-content>
     <v-footer app>
-      <span>&copy; Lucas Draichi</span>
+      <span>&copy; Lucas Draichi Inc.</span>
     </v-footer>
   </v-app>
 </template>

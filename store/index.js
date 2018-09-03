@@ -51,7 +51,7 @@ export const mutations = {
   getOptions: (state, data) => {
     state.forecastDays = data.forecastDays
     state.changepointPriorScale = data.changepointPriorScale
-    state.assetName = data.asset
+    state.assetName = data.asset.replace(/\w/, c => c.toUpperCase())
     state.currency = data.currency
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-flex text-xs-center>
+    <v-flex text-xs-center xs12>
       {{ ds }}
       <vue-plotly :data="data" :layout="layout" :options="options"/>
       <v-btn
