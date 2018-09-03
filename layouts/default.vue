@@ -47,7 +47,7 @@
       </v-container>
     </v-content>
     <v-footer app>
-      <span>&copy; Lucas Draichi Inc.</span>
+      <span>&copy; <a href="https://github.com/Bud-Fox">Bud Fox</a> - Lucas Draichi Inc.</span>
     </v-footer>
   </v-app>
 </template>
@@ -59,8 +59,8 @@
         clipped: false,
         drawer: true,
         items: [
-          { icon: 'apps', title: 'Ask to Bud', to: '/' },
-          { icon: 'bubble_chart', title: 'Answer', to: '/answer' }
+          { icon: 'local_atm', title: 'Ask to Bud', to: '/' },
+          { icon: 'business_center', title: 'Answer', to: '/answer' }
         ],
         miniVariant: false,
         title: 'Bud Fox'
