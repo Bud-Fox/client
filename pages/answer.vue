@@ -1,9 +1,7 @@
 <template>
   <v-layout>
-    <v-flex v-if="this.$store.state.loading"><h1>loading</h1></v-flex>
-    <v-flex text-xs-center v-else>
+    <v-flex text-xs-center>
       {{ ds }}
-      <!-- {{ this.$store.state.forecast }} -->
       <vue-plotly :data="data" :layout="layout" :options="options"/>
       <v-btn
         large
@@ -46,9 +44,9 @@ export default {
         },
       ],
       layout: { 
-        title: 'forecast',
+        title: `${this.$store.state.assetName} Price Forecasting ${this.$store.state.forecastDays} days, ${this.$store.state.changepointPriorScale} Scale`,
         xaxis: { type: 'date' },
-        yaxis: { title: 'Price' },
+        yaxis: { title: `Price (${this.$store.state.currency})` },
         font: { color: 'rgb(255,255,255)' },
         plot_bgcolor: '#2d2929',
         paper_bgcolor: '#2d2929'

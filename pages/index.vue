@@ -15,7 +15,7 @@
         <img src="/bud.jpg" alt="avatar">
       </v-avatar>
       <blockquote class="blockquote">
-        &#8220;Tell me what u wanna know Grodon. <br> Forecast {{ forecast }} days {{ this.asset.name }}/{{ this.currency }}, based on {{ days }} days?&#8221;
+        &#8220;Tell me what u wanna know Grodon. <br> Forecast {{ forecastDays }} days {{ this.asset.name }}/{{ this.currency }}, based on {{ days }} days?&#8221;
         <footer>
           <small>
             <em>&mdash;Bud Fox</em>
@@ -27,6 +27,7 @@
       v-model="asset"
       :items="coinsList"
       outline
+      label="Coin"
       persistent-hint
       return-object
       single-line
@@ -37,6 +38,14 @@
       v-model="currency"
       :items="currencyList"
       outline
+      return-object
+      single-line
+    ></v-select>
+    <v-select
+      v-model="changepointPriorScale"
+      :items="changepointList"
+      outline
+      label="Changepouint"
       return-object
       single-line
     ></v-select>
@@ -51,7 +60,7 @@
     </v-flex>
     <v-flex>
       <v-slider
-        v-model="forecast"
+        v-model="forecastDays"
         :max="100"
         :min="1"
         label="Forecast"
@@ -59,12 +68,16 @@
         inverse-label
       ></v-slider>
     </v-flex>
+    <v-flex v-if="this.$store.state.loading">
+      <h1>loading</h1>
+    </v-flex>
     <v-flex
       xs12
       align-center
       justify-center
       layout
       text-xs-center
+      v-else
     >
       <v-btn
         color="secondary"
@@ -85,9 +98,11 @@ export default {
   data: () => ({
     asset: { name: 'Bitcoin', id: 'bitcoin' },
     days: 90,
-    forecast: 3,
+    forecastDays: 3,
+    changepointPriorScale: 0.01,
     currency: 'USD',
-    currencyList: ['USD', 'EUR', 'JPY', 'BTC', 'ETH']
+    currencyList: ['USD', 'BTC', 'ETH', 'EUR', 'JPY'],
+    changepointList: [0.09, 0.07, 0.05, 0.01]
   }),
   computed: {
     coinsList () {
@@ -99,13 +114,24 @@ export default {
       console.log(this.asset.id, this.days, this.currency)
       return axios.get(`https://api.coingecko.com/api/v3/coins/${this.asset.id}/market_chart?vs_currency=${this.currency}&days=${this.days}`)
         .then(res => {
+          this.$store.commit('getOptions', {
+            forecastDays: this.forecastDays,
+            changepointPriorScale: this.changepointPriorScale,
+            asset: this.asset.name,
+            currency: this.currency
+          })
           this.$store.commit('getPrices', res.data)
-          // this.$store.commit('sendApi', {'ds': this.$store.state.ds, 'y': this.$store.state.y})
         })
     }
   },
-  async fetch ({ store, params }) {
-    store.dispatch('setCoins')
+  beforeCreate() {
+    return axios.get('https://api.coingecko.com/api/v3/coins/list')
+      .then(res => {
+        this.$store.commit('getCoins', res.data)
+      })
   }
+  // async fetch ({ store, params }) {
+  //   store.dispatch('setCoins')
+  // }
 }
 </script>
