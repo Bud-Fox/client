@@ -15,7 +15,7 @@
         <img src="https://raw.githubusercontent.com/Bud-Fox/live/master/bud.jpg" alt="avatar">
       </v-avatar>
       <blockquote class="blockquote">
-        &#8220;Tell me what u wanna know Grodon.
+        &#8220;Tell me what u wanna know Gordon.
         <span v-if="this.model != null"><br><strong> Forecast {{ forecastDays }} days {{ this.model }}/{{ this.currency }}, based on {{ days }} days w/ changepoint of {{ this.changepointPriorScale }}?</strong></span>&#8221;
         <footer>
           <small>
@@ -32,7 +32,7 @@
       clearable
       item-text="name"
       item-value="id"
-      label="Ex: Bitcoin"
+      label="Asset"
       solo
       outline
       class="mb-1"
@@ -70,7 +70,7 @@
       :items="currencyList"
       outline
       return-object
-      label="Ex: USD"
+      label="Currency"
       single-line
     ></v-select>
     <v-select
@@ -84,7 +84,7 @@
     <v-flex>
       <v-slider
         v-model="forecastDays"
-        :max="100"
+        :max="10"
         :min="1"
         label="Forecast days"
         thumb-label="always"
@@ -93,14 +93,25 @@
     <v-flex>
       <v-slider
         v-model="days"
-        :max="365"
+        :max="60"
         :min="1"
         label="Based in how many days"
         thumb-label="always"
       ></v-slider>
     </v-flex>
-    <v-flex v-if="this.$store.state.loading">
-      <h1>loading</h1>
+    <v-flex
+      v-if="this.$store.state.loading"
+      xs12
+      align-center
+      justify-center
+      layout
+      text-xs-center
+      class="mb-5"
+    >
+      <v-progress-circular
+        indeterminate
+        color="primary"
+      ></v-progress-circular>
     </v-flex>
     <v-flex
       xs12
@@ -128,11 +139,11 @@ import axios from 'axios'
 export default {
   data: () => ({
     days: 15,
-    forecastDays: 3,
+    forecastDays: 2,
     changepointPriorScale: null,
     currency: null,
     currencyList: ['USD', 'BTC', 'ETH', 'EUR', 'JPY'],
-    changepointList: [0.10,0.09,0.08,0.07,0.06,0.05,0.04,0.03,0.02,0.01],
+    changepointList: [0.01,0.02,0.03,0.04,0.05,0.06,0.07],
     isLoading: false,
     items: [],
     model: null,
@@ -140,6 +151,10 @@ export default {
   }),
   methods: {
     requestPrices () {
+      axios.get('https://radiant-forest-48616.herokuapp.com/ping')
+        .then(res => {
+          console.log('Server day:', res.data)
+        })
       console.log(this.model, this.days, this.currency)
       return axios.get(`https://api.coingecko.com/api/v3/coins/${this.model}/market_chart?vs_currency=${this.currency}&days=${this.days}`)
         .then(res => {
@@ -169,3 +184,8 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+  .v-progress-circular
+    margin: 1rem
+</style>
