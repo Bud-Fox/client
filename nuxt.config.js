@@ -1,3 +1,8 @@
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/live/'
+  }
+} : {}
 
 module.exports = {
   /*
@@ -11,10 +16,11 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Bud Fox using Nuxt.js' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: 'https://raw.githubusercontent.com/Bud-Fox/live/master/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
     ]
   },
+  ...routerBase,
   modules: [
     '@nuxtjs/axios'
   ],
@@ -34,8 +40,10 @@ module.exports = {
   */
   build: {
     vendor: [
-      '~/plugins/vuetify.js'
+      '~/plugins/vuetify.js',
+      'plotly.js'
     ],
+    publicPath: 'https://bud-fox.github.io/live/',
     extractCSS: true,
     /*
     ** Run ESLint on save

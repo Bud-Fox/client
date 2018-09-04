@@ -12,7 +12,7 @@
         :size="200"
         color="grey lighten-4"
       >
-        <img src="/bud.jpg" alt="avatar">
+        <img src="https://raw.githubusercontent.com/Bud-Fox/live/master/bud.jpg" alt="avatar">
       </v-avatar>
       <blockquote class="blockquote">
         &#8220;Tell me what u wanna know Grodon.
