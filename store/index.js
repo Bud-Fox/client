@@ -2,7 +2,7 @@ const axios = require('axios')
 export const strict = false
 
 export const state = () => ({
-  url: 'http://localhost:5001/prophet',
+  url: 'https://radiant-forest-48616.herokuapp.com/prophet',
   sidebar: false,
   loading: false,
   changepointPriorScale: 0.01,
