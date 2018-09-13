@@ -129,8 +129,6 @@
       >Yeah</v-btn>
     </v-flex>
   </v-container>
-  
-  
 </template>
 
 <script>
@@ -149,12 +147,14 @@ export default {
     model: null,
     search: null
   }),
+  asyncData: () => {
+    axios.get('https://radiant-forest-48616.herokuapp.com/ping')
+      .then(res => {
+        console.log('Server says:', res.data)
+      })
+  },
   methods: {
     requestPrices () {
-      axios.get('https://radiant-forest-48616.herokuapp.com/ping')
-        .then(res => {
-          console.log('Server day:', res.data)
-        })
       console.log(this.model, this.days, this.currency)
       return axios.get(`https://api.coingecko.com/api/v3/coins/${this.model}/market_chart?vs_currency=${this.currency}&days=${this.days}`)
         .then(res => {
