@@ -22,7 +22,10 @@ module.exports = {
   },
   ...routerBase,
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-125323788-1'
+    }]
   ],
   axios: {
     proxyHeader: false
