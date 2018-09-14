@@ -9,7 +9,14 @@ export const state = () => ({
   forecastDays: 3,
   assetName: '',
   currency: '',
-  forecast: [],
+  forecast: {
+    'ds': [1,2,3],
+    'y': [1,2,3],
+    'yhat': [1,2,3],
+    'yhat_upper': [1,2,3],
+    'yhat_lower': [1,2,3],
+    'trend': [1,2,3],
+  },
   prices: [],
   coins: [],
   ds: [],
@@ -56,11 +63,4 @@ export const mutations = {
   }
 }
 
-export const actions = {
-  // setCoins ({ commit }) {
-  //   return axios.get('https://api.coingecko.com/api/v3/coins/list')
-  //     .then(res => {
-  //       commit('getCoins', res.data)
-  //     })
-  // }
-}
+export const actions = {}
