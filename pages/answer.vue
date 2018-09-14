@@ -2,7 +2,8 @@
   <v-layout>
     <v-flex text-xs-center xs12>
       {{ ds }}
-      <vue-plotly :data="data" :layout="layout" :options="options"/>
+      <!-- {{ this.$store.state.forecast }} -->
+      <div ref="line"></div>
       <v-btn
         large
         to="/"
@@ -12,12 +13,9 @@
 </template>
 
 <script>
-import VuePlotly from '@statnett/vue-plotly'
+import Plotly from 'plotly.js-finance-dist'
 
 export default {
-  components: {
-    VuePlotly
-  },
   data: function () {
     return {
       data: [
@@ -50,9 +48,15 @@ export default {
         font: { color: 'rgb(255,255,255)' },
         plot_bgcolor: '#2d2929',
         paper_bgcolor: '#2d2929'
-      },
-      options: {}
+      }
     }
+  },
+  mounted () {
+    Plotly.plot(
+      this.$refs.line,
+      this.data,
+      this.layout
+    )
   },
   computed: {
     ds () {

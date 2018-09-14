@@ -15,8 +15,7 @@
         <img src="https://raw.githubusercontent.com/Bud-Fox/live/master/bud.jpg" alt="avatar">
       </v-avatar>
       <blockquote class="blockquote">
-        &#8220;Tell me what u wanna know Gordon.
-        <span v-if="this.model != null"><br><strong> Forecast {{ forecastDays }} days {{ this.model }}/{{ this.currency }}, based on {{ days }} days w/ changepoint of {{ this.changepointPriorScale }}?</strong></span>&#8221;
+        <span v-if="this.model != null">&#8220;Forecast <strong>{{ forecastDays }}</strong> days <strong>{{ this.model.toUpperCase() }}/{{ this.currency }}</strong>, based on <strong>{{ days }}</strong> days w/ changepoint of <strong>{{ this.changepointPriorScale }}</strong>?&#8221;</span>
         <footer>
           <small>
             <em>&mdash;Bud Fox</em>
