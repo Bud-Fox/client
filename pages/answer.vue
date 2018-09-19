@@ -1,13 +1,16 @@
 <template>
   <v-layout>
     <v-flex text-xs-center xs12>
+      <h3 class="display-2 pt-4">{{ this.$store.state.assetName }} Interactive Chart</h3>
       {{ ds }}
       <!-- {{ this.$store.state.forecast }} -->
-      <div ref="line"></div>
+      <div class="elevation-8 my-5" ref="plot"></div>
       <v-btn
+        color="secondary"
         large
-        to="/"
-      >Ask again</v-btn>
+        fab
+        to="/ask"
+      >Back</v-btn>
     </v-flex>
   </v-layout>
 </template>
@@ -42,9 +45,17 @@ export default {
         },
       ],
       layout: { 
-        title: `${this.$store.state.assetName} Price Forecasting ${this.$store.state.forecastDays} days, ${this.$store.state.changepointPriorScale} Scale`,
+        title: `${this.$store.state.assetName} Price Forecasting ${this.$store.state.forecastDays} days, Trend Changepoint: ${this.$store.state.changepointPriorScale*100}%`,
         xaxis: { type: 'date' },
-        yaxis: { title: `Price (${this.$store.state.currency})` },
+        yaxis: {
+          title: `Price (${this.$store.state.currency})`,
+          side: 'right',
+          showgrid: 'true',
+          gridcolor: 'rgba(255,255,255,.05)'
+        },
+        legend: {
+          orientation: 'h'
+        },
         font: { color: 'rgb(255,255,255)' },
         plot_bgcolor: '#2d2929',
         paper_bgcolor: '#2d2929'
@@ -53,7 +64,7 @@ export default {
   },
   mounted () {
     Plotly.plot(
-      this.$refs.line,
+      this.$refs.plot,
       this.data,
       this.layout
     )
