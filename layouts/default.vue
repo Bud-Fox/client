@@ -56,13 +56,14 @@
   export default {
     data () {
       return {
-        clipped: false,
+        clipped: true,
         drawer: true,
         items: [
-          { icon: 'local_atm', title: 'Ask to Bud', to: '/' },
-          { icon: 'business_center', title: 'Answer', to: '/answer' }
+          { icon: 'home', title: 'Home', to: '/' },
+          { icon: 'business_center', title: 'Ask to Bud', to: '/ask' },
+          { icon: 'local_atm', title: 'Answer', to: '/answer' }
         ],
-        miniVariant: false,
+        miniVariant: true,
         title: 'Bud Fox'
       }
     }
